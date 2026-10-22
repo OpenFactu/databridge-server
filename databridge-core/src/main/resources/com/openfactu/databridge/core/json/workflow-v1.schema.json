@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:databridge:schema:workflow:v1",
+  "title": "DataBridge workflow, formatVersion 1",
+  "type": "object",
+  "required": ["formatVersion", "id", "version", "nodes"],
+  "additionalProperties": false,
+  "properties": {
+    "formatVersion": { "const": 1 },
+    "id": { "$ref": "#/$defs/identifier" },
+    "version": { "type": "integer", "minimum": 1 },
+    "description": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/identifier" },
+          "type": { "$ref": "#/$defs/identifier" },
+          "config": { "type": "object" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "$ref": "#/$defs/identifier" },
+          "to": { "$ref": "#/$defs/identifier" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$" }
+  }
+}

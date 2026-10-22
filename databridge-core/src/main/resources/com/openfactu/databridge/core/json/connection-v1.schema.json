@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:databridge:schema:connection:v1",
+  "title": "DataBridge connection",
+  "type": "object",
+  "required": ["id", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "#/$defs/identifier" },
+    "type": { "$ref": "#/$defs/identifier" },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "credentials": {
+      "description": "Referencia a un secreto, nunca el secreto: env:NOMBRE_VARIABLE",
+      "type": "string",
+      "pattern": "^env:[A-Za-z_][A-Za-z0-9_]*$"
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$" }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "pg-source",
+  "type": "postgresql",
+  "parameters": { "host": "localhost", "port": "5432", "database": "crm", "user": "databridge" },
+  "credentials": "env:DATABRIDGE_PG_PASSWORD"
+}

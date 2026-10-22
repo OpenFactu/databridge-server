@@ -1,0 +1,24 @@
+# Catálogo único de versiones. Las librerías sin versión explícita
+# (Jackson, JUnit, AssertJ, SLF4J...) las fija el BOM de Spring Boot,
+# usado solo como gestor de versiones: core/engine no dependen de Spring.
+[versions]
+java = "21"
+spring-boot = "4.1.1"
+spotless = "8.10.4"
+palantir-java-format = "2.102.0"
+json-schema-validator = "3.0.8"
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+jackson-databind = { module = "tools.jackson.core:jackson-databind" }
+json-schema-validator = { module = "com.networknt:json-schema-validator", version.ref = "json-schema-validator" }
+slf4j-api = { module = "org.slf4j:slf4j-api" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+assertj-core = { module = "org.assertj:assertj-core" }
+spotless-gradle-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

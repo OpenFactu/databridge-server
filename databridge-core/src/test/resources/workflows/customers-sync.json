@@ -1,0 +1,27 @@
+{
+  "formatVersion": 1,
+  "id": "customers-sync",
+  "version": 1,
+  "description": "Copia clientes de un origen a un destino con mapeo de campos y upsert por clave externa.",
+  "nodes": [
+    {
+      "id": "read-customers",
+      "type": "read",
+      "config": { "connection": "pg-source", "dataset": "public.customers", "batchSize": 500 }
+    },
+    {
+      "id": "map-fields",
+      "type": "map",
+      "config": { "fields": { "external_id": "id", "name": "full_name", "email_address": "email" } }
+    },
+    {
+      "id": "write-clients",
+      "type": "write",
+      "config": { "connection": "mssql-target", "dataset": "dbo.clients", "mode": "upsert", "keys": ["external_id"] }
+    }
+  ],
+  "edges": [
+    { "from": "read-customers", "to": "map-fields" },
+    { "from": "map-fields", "to": "write-clients" }
+  ]
+}
